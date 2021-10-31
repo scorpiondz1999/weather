@@ -143,8 +143,9 @@ var getWeatherDisp = function (dayweath, searchTheCity) {
 };
 
 var latLon = function (lat, lon) {
- 
-  fetch().then(function (response) {
+  var apiKey = "844421298d794574c100e3409cee0499";
+  var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`;
+  fetch(apiURL).then(function (response) {
     response.json().then(function (data) {
       displayLatLon(data);
     });
