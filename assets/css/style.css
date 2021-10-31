@@ -1,0 +1,27 @@
+.list-group-item {
+  line-height: 0.5;
+  border: none;
+}
+.card-body {
+  flex: auto;
+}
+
+span.severe {
+  padding: 7px;
+  background-color: rgb(126, 10, 10);
+  color: white;
+}
+
+span.moderate {
+  padding: 7px;
+  background-color: rgb(25, 145, 31);
+}
+
+span.favorable {
+  padding: 3px;
+  background-color: rgb(51, 17, 155);
+  color: white;
+}
+h1 {
+  background-color: rgb(84, 114, 194);
+}
