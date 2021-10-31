@@ -151,6 +151,65 @@ var latLon = function (lat, lon) {
     });
   });
 };
+var displayLatLon = function (index) {
+  var toTheEl = document.createElement("div");
+  toTheEl.textContent = "UV Index: ";
+  toTheEl.classList = "list-group-item";
+
+  uvIndexValue = document.createElement("span");
+  uvIndexValue.textContent = index.value;
+
+  if (index.value <= 2) {
+    uvIndexValue.classList = "favorable";
+  } else if (index.value > 2 && index.value <= 8) {
+    uvIndexValue.classList = "moderate ";
+  } else if (index.value > 8) {
+    uvIndexValue.classList = "severe";
+  }
+
+  toTheEl.appendChild(uvIndexValue);
+
+  //append index to current weather
+  weathernow.appendChild(toTheEl);
+};
+
+var get5Day = function (city) {
+  var apiKey = "844421298d794574c100e3409cee0499";
+  var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
+
+  fetch(apiURL).then(function (response) {
+    response.json().then(function (data) {
+      displayFiveDays(data);
+    });
+  });
+};
+
+var displayFiveDays = function (weather) {
+  theContainerEl.textContent = "";
+  futurWeather.textContent = "5-Day Forecast:";
+
+  var forecast = weather.list;
+  for (var i = 5; i < forecast.length; i = i + 8) {
+    var dailyForecast = forecast[i];
+
+    var forecastEl = document.createElement("div");
+    forecastEl.classList = "card bg-primary text-light m-2";
+
+    var date = document.createElement("h5");
+    date.textContent = moment.unix(dailyForecast.dt).format("MMM D, YYYY");
+    date.classList = "card-header text-center";
+    forecastEl.appendChild(date);
+
+    //image element
+    var weatherIcon = document.createElement("img");
+    weatherIcon.classList = "card-body text-center";
+    weatherIcon.setAttribute(
+      "src",
+      `https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png`
+    );
+
+    
+    forecastEl.appendChild(weatherIcon);
 
     
   
