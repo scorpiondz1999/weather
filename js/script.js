@@ -128,5 +128,28 @@ var getWeatherDisp = function (dayweath, searchTheCity) {
     humidityEl.textContent = "Humidity: " + dayweath.main.humidity + " %";
     humidityEl.classList = "list-group-item";
   
+  //append all three to container 
+  weathernow.appendChild(windSpeedEl);
+
+  
+  weathernow.appendChild(temp);
+
+  
+  weathernow.appendChild(humidityEl);
+//UV index
+  var getLat = dayweath.coord.lat;
+  var lone = dayweath.coord.lon;
+  latLon(getLat, lone);
+};
+
+var latLon = function (lat, lon) {
+ 
+  fetch().then(function (response) {
+    response.json().then(function (data) {
+      displayLatLon(data);
+    });
+  });
+};
+
     
   
